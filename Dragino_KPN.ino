@@ -37,16 +37,16 @@ DHT dht(DHTPIN, DHTTYPE);
 // LoRaWAN NwkSKey, network session key
 // This is the default Semtech key, which is used by the prototype TTN
 // network initially.
-static const PROGMEM u1_t NWKSKEY[16] = { 0xf1, 0x73, 0xb9, 0xd3, 0xee, 0xc3, 0xf6, 0x47, 0x02,0xef, 0xc5, 0x90, 0x0b, 0x5a, 0x26, 0xd3  };
+static const PROGMEM u1_t NWKSKEY[16] = {   };
 
 // LoRaWAN AppSKey, application session key
 // This is the default Semtech key, which is used by the prototype TTN
 // network initially.
-static const u1_t PROGMEM APPSKEY[16] = { 0xf3, 0x09, 0x04, 0x16, 0x97, 0x30, 0x1e, 0x87, 0x22, 0x8e, 0x7c, 0xba, 0xb2, 0x0c, 0x36, 0xc8 };
+static const u1_t PROGMEM APPSKEY[16] = {   };
 
 // LoRaWAN end-device address (DevAddr)
 // See http://thethingsnetwork.org/wiki/AddressSpace
-static const u4_t DEVADDR = 0x142061CF; // <-- Change this address for every node!
+static const u4_t DEVADDR = 0x00000000 // <-- Change this address for every node!
 // These callbacks are only used in over-the-air activation, so they are
 // left empty here (we cannot leave them out completely unless
 // DISABLE_JOIN is set in config.h, otherwise the linker will complain).

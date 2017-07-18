@@ -30,7 +30,7 @@
 
 
 #define DHTPIN 3
-#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321  
+#define DHTTYPE DHT22   // DHT 11    
 
 DHT dht(DHTPIN, DHTTYPE);
 

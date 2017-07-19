@@ -169,7 +169,7 @@ int b=(int)a;
 void setup() {
     Serial.begin(115200);
     Serial.println(F("Starting"));
-    ThingSpeak.begin();
+    ThingSpeak.begin(client);
     
 
     #ifdef VCC_ENABLE

@@ -54,8 +54,8 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-unsigned long myChannelNumber = 266512;
-const char * myWriteAPIKey = "9ZGE0M7P684PRL6G";
+unsigned long myChannelNumber = ;
+const char * myWriteAPIKey = " ";
 float data;
 String datastring="";
 char databuf[10];

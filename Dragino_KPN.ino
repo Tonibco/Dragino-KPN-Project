@@ -1,5 +1,4 @@
 
-
 /*******************************************************************************
  * Copyright (c) 2015 Thomas Telkamp and Matthijs Kooijman
  *
@@ -26,21 +25,18 @@
 #include <lmic.h>
 #include <hal/hal.h>
 #include <SPI.h>
-#include <DHT.h>
+//#include <DHT.h>
 #include "ThingSpeak.h"
-#include "YunClient.h"
-YunClient client;
 
+//#define DHTPIN 3
+//#define DHTTYPE DHT11   // DHT 22  (AM2302), AM2321  
 
-#define DHTPIN 3
-#define DHTTYPE DHT11   // DHT 11    
-
-DHT dht(DHTPIN, DHTTYPE);
+//DHT dht(DHTPIN, DHTTYPE);
 
 // LoRaWAN NwkSKey, network session key
 // This is the default Semtech key, which is used by the prototype TTN
 // network initially.
-static const PROGMEM u1_t NWKSKEY[16] = {   };
+static const PROGMEM u1_t NWKSKEY[16] = {  };
 
 // LoRaWAN AppSKey, application session key
 // This is the default Semtech key, which is used by the prototype TTN
@@ -57,13 +53,12 @@ void os_getArtEui (u1_t* buf) { }
 void os_getDevEui (u1_t* buf) { }
 void os_getDevKey (u1_t* buf) { }
 
-unsigned long myChannelNumber = ;
-const char * myWriteAPIKey = " ";
 float data;
 String datastring="";
 char databuf[10];
 uint8_t dataoutgoing[10];
-
+unsigned long myChannelNumber = ;
+const char * myWriteAPIKey = " ";
 static osjob_t sendjob;
 
 // Schedule TX every this many seconds (might become longer due to duty
@@ -145,18 +140,17 @@ void onEvent (ev_t ev) {
 
 void do_send(osjob_t* j){
 
-  float a=(dht.readTemperature()*100); 
+  //float a=(dht.readTemperature());
+  float a = 24; 
   //float a=(dht.readTemperature()*100)*1.8 + 32; 
-
-                  // ThingSpeak.setField(2,h); 
-                  ThingSpeak.setField(1,a);
-                  ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);   // Send Data to IoT Server.
-
+    ThingSpeak.setField(1,a);
+    ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);   // Send Data to IoT Server.
 int b=(int)a;
   data = b;
   datastring +=dtostrf(data, 4, 2, databuf);
   strcpy((char *)dataoutgoing,databuf);
   Serial.println(databuf);
+  
   
     // Check if there is not a current TX/RX job running
     if (LMIC.opmode & OP_TXRXPEND) {
@@ -172,8 +166,6 @@ int b=(int)a;
 void setup() {
     Serial.begin(115200);
     Serial.println(F("Starting"));
-    ThingSpeak.begin(client);
-    
 
     #ifdef VCC_ENABLE
     // For Pinoccio Scout boards
